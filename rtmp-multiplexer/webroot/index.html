@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>RTMP Multiplexer</title>
+  <meta name="description" content="RTMP Multiplexer with Nginx in Docker">
+  <meta name="author" content="Lighthouse Lab (github.com/lighthouselab)">
+
+  <link rel="stylesheet" href="styles/main.css">
+
+</head>
+
+<body>
+  <h1>Woot!</h1>
+  <p>The nginx-based RTMP multiplexer ("restreamer") seems to be running.</p>
+
+  <h2>What now?</h2>
+  <p>The next step is to configure this server to become a stream forwarder with a single endpoint or multiple endpoints. You might also want to edit the contents of this page, located at <strong>webroot/index.html</strong>, and you need to limit access to this server from the outside world.</p>
+
+  <h3>Stream forwarder with a single endpoint ('lazy relay' or bridge mode)</h3>
+  <p>If you want to have this server as some kind of single public endpoint between a certain sender and receiver, you can put the following configuration in <code>nginx.conf</code>:</p>
+  
+<pre><code>events {}
+rtmp {
+  server {
+    listen 1935;
+    chunk_size 4096;
+
+    application live {
+      live on;
+      record off;
+    }
+  }
+}</code></pre>
+
+  <ul>
+    <li>Send an RTMP stream to <code>rtmp://[your server ip]/live</code>, with livestream broadcasting software (Xsplit, OBS, Wirecast...). Use a stream key when necessary.</li>
+    <li>Use an RTMP capable player like VLC to connect to rtmp://[your server ip]/live, using the same stream key if you have set up one.</li>
+  </ul>
+
+  <h3>Stream forwarder with multiple endpoints ('active relay' or multiplexing/restreaming mode)</h3>
+  <p>Instead of having a relay, you can also easily set up a stream multiplexer. The stream multiplexer would take a single input stream and actively forward it to one or multiple endpoints. The following <code>nginx.conf</code> configuration does this:</p>
+
+<pre><code>events {}
+rtmp {
+  server {
+    listen 1935;
+    chunk_size 4096;
+
+    application live {
+      live on;
+      record off;
+      push rtmp://[other streaming service]/[stream app][/stream key (optional)];
+      push rtmp://[other streaming service]/[stream app][/stream key (optional)];
+    }
+  }
+}</code></pre>
+
+  <ul>
+    <li>Edit the configuration to use your own destination endpoints.</li>
+    <li>Send an RTMP stream to <code>rtmp://[your server ip]/live</code>, with livestream broadcasting software (Xsplit, OBS, Wirecast...). Use a stream key when necessary.</li>
+    <li>Incoming RTMP streams are automatically forwarded/multiplexed/restreamed to all services.</li>
+    <li>You can also still use an RTMP capable player like VLC to connect to rtmp://[your server ip]/live, using the same stream key if you have set up one. For example, when you want to have a 'feedback channel'.</li>
+  </ul>
+
+  <h2>Keep an eye on the security!</h2>
+  <p>Remember to add security through firewalls or some sort of access control. Otherwise, anyone that knows your inbound RTMP URL could also stream to your other platforms through this server.</p>
+
+</body>
+</html>

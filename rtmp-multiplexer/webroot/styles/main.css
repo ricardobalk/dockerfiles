@@ -1,0 +1,4 @@
+body { font-family: Helvetica, Arial, sans-serif; max-width: 50rem; margin: 0 auto; padding: 1rem 1rem 2rem; }
+pre > code { display: block; padding: .5em 1.5em; border-left: 3px solid rgba(0,0,0,.10); }
+ul { padding-left: 1rem; }
+ul li:not(:last-child) { margin-bottom: .75rem; }
