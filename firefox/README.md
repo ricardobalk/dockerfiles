@@ -1,20 +1,32 @@
-# Dockerfile: Firefox, based on Alpine Linux.
+# Mozilla Firefox, based on Alpine Linux.
 
-How to use it:
+This is a Mozilla Firefox setup in Docker. Here's how to use it:
 
-1) Build the _base image_ for Mozilla Firefox
+## 1. Pull the image from Docker Hub, or build it.
+
+**Docker Hub**
+
+Pull the image directly from Docker Hub:
+
+```sh
+docker pull ricardobalk/firefox
+```
+
+**Or build it yourself**
+
+Assuming you cloned the repository from GitHub, you could also build the image:
 
 ```sh
 docker build -t ricardobalk/firefox .
 ```
 
-2) Allow X server forwarding so Docker can show the GUI
+## 2. Allow X server forwarding so Docker can show the GUI
 
 ```sh
 xhost local:root
 ```
 
-3) Run the created Docker image in a container
+## 3. Run the created image in a container
 
 ```sh
 docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY -d ricardobalk/firefox
@@ -27,17 +39,17 @@ docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY -d ricardobalk/firef
 
 ---
 
-**Protip: Making it permanent**
+# Protip: Making it permanent
 
 You could also use the image to create a Docker image that doesn't get destroyed each time you close Firefox.
 
-1) Create a new _container_ based on the _base image_:
+## 1. Create a _container_ based on the _image_:
 
 ```sh
 docker create --name 'firefox-personal' -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY ricardobalk/firefox
 ```
 
-2) Start the new container
+## 2. Start the container
 
 ```sh
 docker start firefox-personal
@@ -45,10 +57,18 @@ docker start firefox-personal
 
 Now, changes made to Firefox are kept across restarts of this container. You could also choose a name different than `firefox-personal`, obviously.
 
-3) Removal
+---
 
-If you ever need to remove one of your containers...
+# Removal
+
+First, remove all containers that are using the image...
 
 ```sh
 docker container rm firefox-personal
+```
+
+Then, remove the image...
+
+```sh
+docker image rm ricardobalk/firefox
 ```

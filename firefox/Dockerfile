@@ -1,3 +1,3 @@
 from alpine:latest
-RUN apk --update add firefox ttf-dejavu
+RUN apk add --no-cache firefox ttf-dejavu
 ENTRYPOINT ["/usr/bin/firefox"]
