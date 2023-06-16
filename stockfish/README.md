@@ -28,7 +28,7 @@ Or build multi-architecture image using `buildx`:
 ```sh
 docker buildx build --platform linux/amd64,linux/amd64/v2,linux/arm64 \
                     --label "org.opencontainers.image.description=Stockfish, UCI chess engine, compiled from source. Statically linked with musl libc and optimized for size. Multi-platform image."  \
-                    --label "org.opencontainers.image.source=https://github.com/ricardobalk/docker/tree/main/stockfish" \
+                    --label "org.opencontainers.image.source=https://github.com/ricardobalk/dockerfiles/tree/main/stockfish" \
                     --build-arg ARCH=amd64 \
                     --build-arg ARCH=amd64 \
                     --build-arg ARCH=apple-silicon \

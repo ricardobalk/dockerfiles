@@ -37,7 +37,7 @@ Or build multi-architecture image using `buildx`:
 ```sh
 docker buildx build --platform linux/arm64,linux/amd64,linux/amd64/v2,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 \
                     --label "org.opencontainers.image.description=mkp224o, vanity address generator for tor onion v3 (ed25519) hidden services"  \
-                    --label "org.opencontainers.image.source=https://github.com/ricardobalk/docker/tree/main/mkp224o" \
+                    --label "org.opencontainers.image.source=https://github.com/ricardobalk/dockerfiles/tree/main/mkp224o" \
                     -t ghcr.io/ricardobalk/mkp224o:1.6.1 \
                     -t ghcr.io/ricardobalk/mkp224o:latest \
                     -t ricardobalk/mkp224o:1.6.1 \
