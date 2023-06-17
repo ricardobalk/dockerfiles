@@ -9,10 +9,27 @@ RUN git clone --depth=1 https://github.com/official-stockfish/Stockfish.git . &&
 
 FROM source as build
 WORKDIR /stockfish/src
-ARG ARCH=amd64
 RUN sed -i '574s/^/#/' Makefile # Temporary fix for Clang 16, see https://github.com/official-stockfish/Stockfish/issues/4580
-RUN make build ARCH="${ARCH}" COMP=clang CFLAGS="-static" CXXFLAGS="-static"
-RUN strip stockfish
+
+ARG TARGETPLATFORM
+RUN case "${TARGETPLATFORM}" in \
+    "linux/arm64")    export ARCH=armv8 \
+    ;; \
+    "linux/arm/v7")   export ARCH=armv7-neon \
+    ;; \
+    "linux/ppc64le")  export ARCH=ppc-64 \
+    ;; \
+    "linux/amd64")    export ARCH=x86-64 \
+    ;; \
+    "linux/amd64/v2") export ARCH=x86-64-modern \
+    ;; \
+    "linux/386")      export ARCH=x86-32-sse41-popcnt \
+    ;; \
+    *) echo "Unsupported architecture: ${TARGETPLATFORM}" && exit 1 \
+    ;; \
+    esac \
+    && make build ARCH="${ARCH}" COMP="clang" CFLAGS="-static" CXXFLAGS="-static" \
+    && strip stockfish
 
 # FROM alpine:3.18.0
 # # RUN apk add --no-cache libstdc++
