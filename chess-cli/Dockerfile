@@ -25,7 +25,7 @@ RUN case "${TARGETPLATFORM}" in \
     ;; \
     "linux/386")      export ARCH=x86-32-sse41-popcnt \
     ;; \
-    *) echo "Unsupported architecture: ${TARGETPLATFORM}" && exit 1 \
+    *) echo "Could not find matching CPU architecture for platform: ${TARGETPLATFORM}" && exit 1 \
     ;; \
     esac \
     && make build ARCH="${ARCH}" COMP="clang" \

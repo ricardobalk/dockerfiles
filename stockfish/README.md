@@ -18,9 +18,9 @@ docker run --rm -it ghcr.io/ricardobalk/stockfish:15.1
 Build for current platform only:
 
 ```sh
-docker build -t stockfish:15.1 --build-arg TARGETPLATFORM=x86-64-modern .
+docker build -t stockfish:15.1 --build-arg TARGETPLATFORM=linux/amd64/v2 .
 ```
-> Replace `ARCH` with the architecture you want to build for. Check the [Stockfish Makefile](https://github.com/official-stockfish/Stockfish/blob/master/src/Makefile) for a list of supported architectures.
+> Replace `TARGETPLATFORM` to let the build step match the correct CPU architecture that is in use. Take a look at the the [Dockerfile](./Dockerfile) if you have specific needs. The [Stockfish Makefile](https://github.com/official-stockfish/Stockfish/blob/master/src/Makefile) contains of supported CPU architectures.
 
 Or build multi-architecture image using `buildx`:
 
@@ -37,3 +37,5 @@ docker buildx build --platform linux/amd64,linux/amd64/v2,linux/arm64,linux/ppc6
                     --push \
                     .
 ```
+
+> The `TARGETPLATFORM` argument is not needed when using `buildx` as it will be set automatically.

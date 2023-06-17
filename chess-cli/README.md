@@ -20,12 +20,12 @@ docker build -t ghcr.io/ricardobalk/chess-cli:1.0.0 \
              -t ghcr.io/ricardobalk/chess-cli:latest \
              -t ricardobalk/chess-cli:1.0.0 \
              -t ricardobalk/chess-cli:latest \
-             --build-arg TARGETPLATFORM=x86-64-modern \
+             --build-arg TARGETPLATFORM=linux/amd64/v2 \
              --no-cache \
              .
 ```
 
-> Replace `ARCH` with the architecture you want to build for. Check the [Stockfish Makefile](https://github.com/official-stockfish/Stockfish/blob/master/src/Makefile) for a list of supported architectures.
+> Replace `TARGETPLATFORM` to let the build step match the correct CPU architecture that is in use. Take a look at the the [Dockerfile](./Dockerfile) if you have specific needs. The [Stockfish Makefile](https://github.com/official-stockfish/Stockfish/blob/master/src/Makefile) contains of supported CPU architectures.
 
 Or build multi-architecture image using `buildx`:
 
@@ -41,3 +41,5 @@ docker buildx build --platform linux/amd64,linux/amd64/v2,linux/arm64 \
                     --push \
                     .
 ```
+
+> The `TARGETPLATFORM` argument is not needed when using `buildx` as it will be set automatically.
