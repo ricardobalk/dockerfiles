@@ -4,12 +4,12 @@ This repository contains my Dockerfiles used for the images on [Docker Hub][] an
 
 ## List of available images
 
-| Name | Description | Links | Version | Platforms |
-| ---- | ----------- | ----- | ------- | --------- |
-| [chess-cli][chess-cli-github] | Chess CLI using Stockfish 15 | [Repository][chess-cli-github] / [Docker Hub][chess-cli-dockerhub] / [GitHub Container Registry][chess-cli-ghcr] | 1.0.0 | linux/amd64 linux/amd64/v2 linux/arm64 linux/arm/v7 |
-| [firefox][firefox-github] | Firefox web browser | [Repository][firefox-github] / [Docker Hub][firefox-dockerhub] / [GitHub Container Registry][firefox-ghcr] | ? | linux/arm64 linux/amd64 linux/amd64/v2 linux/386 linux/arm/v7 |
-| [mkp224o][mkp224o-github] | vanity address generator for tor onion v3 (ed25519) hidden services | [Repository][mkp224o-github] / [Docker Hub][mkp224o-dockerhub] / [GitHub Container Registry][mkp224o-ghcr] | 1.6.1 | linux/arm64 linux/amd64 linux/amd64/v2 linux/ppc64le linux/s390x linux/386 linux/arm/v7 linux/arm/v6 |
-| [stockfish][stockfish-github] | UCI chess engine | [Repository][stockfish-github] / [Docker Hub][stockfish-dockerhub] / [GitHub Container Registry][stockfish-ghcr] | 15.1 | linux/amd64 linux/amd64/v2 linux/arm64 linux/ppc64le linux/386 linux/arm/v7 |
+| Name | Description | Links | Version | Source-based? | Platforms |
+| ---- | ----------- | ----- | ------- | ------------- | --------- |
+| [chess-cli][chess-cli-github] | Chess CLI using Stockfish 15 | [Repository][chess-cli-github] / [Docker Hub][chess-cli-dockerhub] / [GitHub Container Registry][chess-cli-ghcr] | 1.0.0 | Yes &#x2705; | linux/amd64 linux/amd64/v2 linux/arm64 linux/arm/v7 |
+| [firefox][firefox-github] | Firefox web browser | [Repository][firefox-github] / [Docker Hub][firefox-dockerhub] / [GitHub Container Registry][firefox-ghcr] | ? | No &#x274C; |  linux/arm64 linux/amd64 linux/amd64/v2 linux/386 linux/arm/v7 |
+| [mkp224o][mkp224o-github] | vanity address generator for tor onion v3 (ed25519) hidden services | [Repository][mkp224o-github] / [Docker Hub][mkp224o-dockerhub] / [GitHub Container Registry][mkp224o-ghcr] | 1.6.1 | Yes &#x2705; | linux/arm64 linux/amd64 linux/amd64/v2 linux/ppc64le linux/s390x linux/386 linux/arm/v7 linux/arm/v6 |
+| [stockfish][stockfish-github] | UCI chess engine | [Repository][stockfish-github] / [Docker Hub][stockfish-dockerhub] / [GitHub Container Registry][stockfish-ghcr] | 16 | Yes &#x2705; | linux/amd64 linux/amd64/v2 linux/arm64 linux/ppc64le linux/386 linux/arm/v7 |
 
 [Docker Hub]: https://hub.docker.com/u/ricardobalk
 [GitHub Container Registry]: https://ghcr.io/ricardobalk
