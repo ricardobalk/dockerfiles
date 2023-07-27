@@ -18,7 +18,7 @@ docker run --rm -it ghcr.io/ricardobalk/stockfish:15.1
 Build for current platform only:
 
 ```sh
-docker build -t stockfish:15.1 --build-arg TARGETPLATFORM=linux/amd64/v2 .
+docker build -t stockfish:16 --build-arg TARGETPLATFORM=linux/amd64/v2 .
 ```
 > Replace `TARGETPLATFORM` to let the build step match the correct CPU architecture that is in use. Take a look at the the [Dockerfile](./Dockerfile) if you have specific needs. The [Stockfish Makefile](https://github.com/official-stockfish/Stockfish/blob/master/src/Makefile) contains of supported CPU architectures.
 
@@ -28,9 +28,9 @@ Or build multi-architecture image using `buildx`:
 docker buildx build --platform linux/amd64,linux/amd64/v2,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7 \
                     --label "org.opencontainers.image.description=Stockfish, UCI chess engine, compiled from source. Statically linked with musl libc and optimized for size. Multi-platform image."  \
                     --label "org.opencontainers.image.source=https://github.com/ricardobalk/dockerfiles/tree/main/stockfish" \
-                    -t ghcr.io/ricardobalk/stockfish:15.1 \
+                    -t ghcr.io/ricardobalk/stockfish:16 \
                     -t ghcr.io/ricardobalk/stockfish:latest \
-                    -t ricardobalk/stockfish:15.1 \
+                    -t ricardobalk/stockfish:16 \
                     -t ricardobalk/stockfish:latest \
                     --no-cache \
                     --progress plain \

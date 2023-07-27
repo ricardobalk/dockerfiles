@@ -5,11 +5,10 @@ FROM dependencies as source
 WORKDIR /stockfish
 RUN git clone --depth=1 https://github.com/official-stockfish/Stockfish.git . && \
     git fetch --tags --prune && \
-    git checkout sf_15.1
+    git checkout sf_16
 
 FROM source as build
 WORKDIR /stockfish/src
-RUN sed -i '574s/^/#/' Makefile # Temporary fix for Clang 16, see https://github.com/official-stockfish/Stockfish/issues/4580
 
 ARG TARGETPLATFORM
 RUN case "${TARGETPLATFORM}" in \
